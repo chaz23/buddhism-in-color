@@ -14,23 +14,30 @@ characters_url <- "https://raw.githubusercontent.com/chaz23/sutta-science/main/d
 
 load(url(sutta_trans_url))
 load(url(vinaya_trans_url))
+load("./R/characters-of-the-mn/data/sutta_characters.Rda")
 
 chars_data <- read_csv(characters_url)
+
+sutta_data <- sutta_data %>% 
+  mutate(text_type = "sutta")
+
+vinaya_data <- vinaya_data %>% 
+  mutate(text_type = "vinaya")
 
 data <- sutta_data %>% bind_rows(vinaya_data)
 
 sutta_list <- chars_data %>% 
   select(character, character_id) %>%
   distinct(.keep_all = TRUE) %>% 
-  filter(character == "Jeta") %>% 
   mutate(sutta_list = future_map(character, ~ {
     data %>% 
       filter(grepl(paste0("\\b", .x, "\\b"), segment_text)) %>%
-      select(sutta, segment_id) %>% 
+      select(sutta, segment_id, text_type) %>% 
       group_by(sutta) %>% 
       slice_head(n = 1) %>% 
       ungroup()
   })) %>% 
+  left_join(select(sutta_characters, id, desc), by = c("character_id" = "id")) %>% 
   unnest(cols = sutta_list)
 
 write_json(sutta_list, path = "./R/characters-of-the-mn/data/characters_sutta_list.json", pretty = TRUE)

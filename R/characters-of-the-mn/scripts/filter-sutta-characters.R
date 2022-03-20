@@ -4,7 +4,7 @@
 
 # Steps. ----
 
-# Download the pali proper names dictionary from suttacentral by pasting this link into your browser:
+# Download the pali proper names dictionary from suttacentral by pasting this link into the browser:
 # https://raw.githubusercontent.com/suttacentral/sc-data/master/dictionaries/complex/en/pli2en_dppn.json
 
 # Save it in "./R/characters-of-the-mn/data/original-pali-proper-names-dict.json"
@@ -83,11 +83,24 @@ sutta_characters <- sutta_proper_names %>%
                           TRUE ~ text)) %>% 
   
   # Parse text field.
-  mutate(text = map2(word, text, parse_text)) %>% 
+  mutate(text = map2(word, text, parse_text)) %>% View()
   unnest(cols = text) %>% 
   
   # Transliterate character name.
   mutate(word_trans = stri_trans_general(word, "latin-ascii"))
+
+
+
+# save(sutta_characters, file = "./R/characters-of-the-mn/data/sutta_characters.Rda")
+
+
+
+
+
+
+
+
+
 
 # save(sutta_characters, file = "./data/dataset_6/sutta_characters.Rda")
 # write_tsv(sutta_characters, "./data/dataset_4/sutta_characters.tsv")
