@@ -1,0 +1,32 @@
+Honor the person from whom you would learn the teaching,
+as the [[gods]] honor Inda.
+Then they will have [[confidence]] in you,
+and being learned, they reveal the teaching.
+Heeding well, a wise pupil
+practicing in line with that teaching
+grows intelligent, discerning, and subtle
+through [[diligence]]ly sticking close to such a person.
+But associating with a petty fool
+who falls short of the goal, jealous,
+then unable to discern the teaching in this life,
+one proceeds to [[death]] still plagued by doubts.
+It’s like a man who has plunged into a river,
+a rushing torrent in spate.
+As they are swept away downstream,
+how could they help others across?
+Just so, one unable to discern the teaching,
+who hasn’t studied the meaning under the learned,
+not knowing it oneself, still plagued by doubts,
+how could they help others to contemplate?
+But one who has embarked on a strong boat
+equipped with rudder and oar,
+would bring many others across there
+with skill, care, and intelligence.
+So too one who understands—a knowledge master,
+evolved, learned, and unflappable—
+can help others to contemplate,
+so long as they are prepared to listen carefully.
+That’s why you should spend time with a good person,
+intelligent and learned.
+Having understood the meaning, putting it into practice,
+one who has realized the teaching may find happiness.

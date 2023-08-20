@@ -1,0 +1,10 @@
+---
+title: "buddhism in color"
+format: gfm
+editor_options: 
+  chunk_output_type: console
+---
+
+<!-- README.md produced by the this file, do not edit by hand! -->
+
+

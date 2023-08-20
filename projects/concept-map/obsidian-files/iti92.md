@@ -1,0 +1,30 @@
+This was said by the Buddha, the Perfected One: that is what I heard.
+“Mendicants, suppose a [[mendicant]] were to hold the corner of my cloak and follow behind me step by step.
+Yet they covet sensual pleasures; they’re infatuated, full of ill will and malicious intent. They are unmindful, lacking situational awareness and [[immersion]], with straying mind and un[[discipline]] faculties.
+Then they are far from me, and I from them.
+Why is that?
+Because that [[mendicant]] does not see the teaching.
+Not seeing the teaching, they do not see me.
+Suppose a [[mendicant]] were to live a hundred leagues away.
+Yet they do not covet sensual pleasures; they’re not infatuated, or full of ill will and malicious intent. They have established mindfulness, situational awareness and [[immersion]], with unified mind and restrained faculties.
+Then they are close to me, and I to them.
+Why is that?
+Because that [[mendicant]] sees the teaching.
+Seeing the teaching, they see me.”
+That is what the Buddha said.
+On this it is said:
+“One full of [[desire]] and distress
+may follow me close behind,
+yet see how distant they are—
+the stirred from the still,
+the burning from the quenched,
+the greedy from the greedless.
+An astute person who has understood
+and directly known the teaching,
+grows calm,
+like a lake unstirred by the wind.
+See how close they are—
+the still to the still,
+the quenched to the quenched,
+the greedless to the greedless.”
+This too was spoken by the Blessed One: that is what I heard.

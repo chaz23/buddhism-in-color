@@ -40,12 +40,17 @@ library(jsonlite)
 # Add entries for the classes of devas
 
 
-data_path <- "./R/characters-of-the-mn/data/original-pali-proper-names-dict.json"
+data_path <- "./projects/characters-of-the-mn/data/original-pali-proper-names-dict.json"
  
 sutta_proper_names <- read_json(data_path) %>% 
   lapply(function (x) as_tibble(x)) %>% 
   do.call("bind_rows", .) 
 
+test_path <- "./../../Downloads/newDppnAdditions/newDppnAdditions.json"
+
+test_proper_names <- read_json(test_path) %>% 
+  lapply(function (x) as_tibble(x)) %>% 
+  do.call("bind_rows", .) 
 
 regex <- list(starts_with_person = "(?=<dt class='place').*?(?=<dt class='person'|</dl>)",
               starts_with_place = "<dl class='place'.*(?=<dt class='person')")
@@ -72,6 +77,7 @@ parse_text <- function (word, text) {
 
 
 sutta_characters <- sutta_proper_names %>% 
+  bind_rows(test_proper_names) %>% 
   # Keep items that include people.
   filter(grepl("class='person'", text)) %>%
   
@@ -83,7 +89,7 @@ sutta_characters <- sutta_proper_names %>%
                           TRUE ~ text)) %>% 
   
   # Parse text field.
-  mutate(text = map2(word, text, parse_text)) %>% View()
+  mutate(text = map2(word, text, parse_text)) %>% 
   unnest(cols = text) %>% 
   
   # Transliterate character name.

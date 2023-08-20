@@ -1,0 +1,8 @@
+“Mendicants, it’s totally impossible that a [[mendicant]] with bad friends, companions, and associates, while frequenting, accompanying, and attending, and following their example, will fulfill the practice dealing with the supplementary regulations.
+Without fulfilling the practice dealing with supplementary regulations, it’s impossible to fulfill the practice of a [[trainee]].
+Without fulfilling the practice of a [[trainee]], it’s impossible to fulfill ethics.
+Without fulfilling ethics, it’s impossible give up [[desire]] to be reborn in the realm of luminous form or in the formless realm.
+It’s possible that a [[mendicant]] with good friends, companions, and associates, while frequenting, accompanying, and attending, and following their example, will fulfill the practice dealing with the supplementary regulations.
+Having fulfilled the practice dealing with supplementary regulations, it’s possible to fulfill the practice of a [[trainee]].
+Having fulfilled the practice of a [[trainee]], it’s possible to fulfill ethics.
+Having fulfilled ethics, it’s possible give up [[desire]] to be reborn in the realm of luminous form or in the formless realm.”

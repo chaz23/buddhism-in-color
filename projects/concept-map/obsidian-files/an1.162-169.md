@@ -1,0 +1,3 @@
+“Those [[mendicant]]s who explain a light offense as a light offense … a serious offense as a serious offense … an offense committed with corrupt intention as an offense committed with corrupt intention … an offense not committed with corrupt intention as an offense not committed with corrupt intention … an offense requiring rehabilitation as an offense requiring rehabilitation … an offense not requiring rehabilitation as an offense not requiring rehabilitation … an offense with redress as an offense with redress … an offense without redress as an offense without redress
+are acting for the welfare and happiness of the people, for the benefit, welfare, and happiness of the people, of [[gods]] and humans.
+They make much merit and make the true teaching continue.”

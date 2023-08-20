@@ -1,0 +1,33 @@
+So I have heard.
+At one time, when he was first awakened, the Buddha was staying near Uruvelā at the root of the tree of awakening on the bank of the Nerañjarā River.
+There the Buddha sat cross-legged for seven days without moving, experiencing the [[bliss]] of freedom.
+When seven days had passed, the Buddha emerged from that state of [[immersion]] and surveyed the world with the eye of a Buddha.
+He saw [[sentient being]]s tormented with many torments, and burning with many fevers
+born of greed, hate, and [[delusion]].
+Then, knowing the meaning of this, on that occasion the Buddha expressed this heartfelt sentiment:
+“This world, born in torment,
+overcome by [[contact]], speaks of disease as the self.
+For whatever it thinks it is,
+it turns out to be something else.
+The world is attached to continued existence, overcome by continued existence,
+taking pleasure only in continued existence, yet it becomes something else.
+What it enjoys, that is the fear;
+what it fears, that is the suffering.
+But this spiritual life is led
+in order to give up continued existence.
+Of the ascetics and [[brahmin]]s who say that through continued existence one is freed from continued existence, none are themselves freed from continued existence, I say.
+Of the ascetics and [[brahmin]]s who say that through [[annihilationism]] of existence one escapes from continued existence, none have themselves escaped from continued existence, I say.
+For this suffering originates dependent on all attachment. With the ending of all grasping there is no origination of suffering.
+Just look at this world!
+Mired in all sorts of ignorance, beings in love with being are not released from continued existence.
+Whatever states of continued existence there are—everywhere, all over—all are impermanent, suffering, and perishable.
+In this way one seeing with right wisdom
+in accord with truth,
+gives up [[craving]] for continued existence,
+while not look forward to ending existence.
+Extinguishment comes from the ending of all [[craving]]s;
+fading away and [[cessation]] with nothing left over.
+There is no further existence
+for that [[mendicant]] extinguished without grasping.
+Victorious in battle, such a one has defeated Māra;
+they’ve gone beyond all states of existence.”

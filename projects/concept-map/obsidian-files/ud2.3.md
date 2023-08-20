@@ -1,0 +1,14 @@
+So I have heard.
+At one time the Buddha was staying near Sāvatthī in Jeta’s Grove, Anāthapiṇḍika’s monastery.
+Now at that time, between Sāvatthī and the Jeta Grove, several boys were hitting a snake with a stick.
+Then the Buddha robed up in the morning and, taking his bowl and robe, entered Sāvatthī for alms.
+He saw the boys hitting the snake.
+Then, knowing the meaning of this, on that occasion the Buddha expressed this heartfelt sentiment:
+“Creatures love happiness,
+so if you hurt them with a stick
+in search of your own happiness,
+after [[death]] you’ll find no happiness.
+Creatures love happiness,
+so if you don’t hurt them with a stick
+in search of your own happiness,
+after [[death]] you will find happiness.”

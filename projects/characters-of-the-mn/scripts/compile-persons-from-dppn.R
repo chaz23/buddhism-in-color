@@ -12,16 +12,6 @@ library(purrr)
 library(stringi)
 library(jsonlite)
 
-# Errors: 
-# Sundarika - class=person - its a river.
-# id Revata1 and Revata2 are the same person?
-# Bhagu, atthaka have two entries with the same ID
-# MN116 make sure I've got the pacceka buddhas correctly
-# Check that I've got the entries of mara and brahma correct
-# Should I put the names of the people whose monastery it was (eg Anathapindikas monastery)
-# Should I include suddhodhana and migaras mother
-# Add entries for the classes of devas
-
 
 data_path <- "https://raw.githubusercontent.com/suttacentral/sc-data/master/dictionaries/complex/en/pli2en_dppn.json"
 

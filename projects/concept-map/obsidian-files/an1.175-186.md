@@ -1,0 +1,4 @@
+“With the appearance of one person, [[mendicant]]s, there is the appearance of a great eye, a great light, a great [[radiance]], and the six unsurpassable things; the realization of the four kinds of textual analysis; the penetration of many and diverse elements; the realization of the fruit of knowledge and freedom; the realization of the fruits of stream-entry, once-return, non-return, and perfection.
+What one person?
+The Realized One, the [[perfected one]], the fully awakened Buddha.
+This is the one person whose appearance brings the appearance of a great eye, a great light, a great [[radiance]], and the six unsurpassable things; the realization of the four kinds of textual analysis; the penetration of many and diverse elements; the realization of the fruit of knowledge and release; the realization of the fruits of stream-entry, once-return, non-return, and perfection.”

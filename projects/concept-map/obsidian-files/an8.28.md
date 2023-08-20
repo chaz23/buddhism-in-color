@@ -1,0 +1,26 @@
+Then Venerable Sāriputta went up to the Buddha, bowed, and sat down to one side. The Buddha said to him:
+“Sāriputta, how many powers does a [[mendicant]] who has ended the [[defilement]]s have that qualify them to claim:
+‘My [[defilement]]s have ended’?”
+“Sir, a [[mendicant]] who has ended the [[defilement]]s has eight powers that qualify them to claim:
+‘My [[defilement]]s have ended.’
+What eight?
+Firstly, a [[mendicant]] with [[defilement]]s ended has clearly seen with right wisdom all conditions as truly impermanent.
+This is a power that a [[mendicant]] who has ended the [[defilement]]s relies on to claim:
+‘My [[defilement]]s have ended.’
+Furthermore, a [[mendicant]] with [[defilement]]s ended has clearly seen with right wisdom that sensual pleasures are truly like a pit of glowing coals.
+This is a power that a [[mendicant]] who has ended the [[defilement]]s relies on to claim:
+‘My [[defilement]]s have ended.’
+Furthermore, the mind of a [[mendicant]] with [[defilement]]s ended slants, slopes, and inclines to seclusion. They’re withdrawn, loving renunciation, and they’ve totally done with defiling influences.
+This is a power that a [[mendicant]] who has ended the [[defilement]]s relies on to claim:
+‘My [[defilement]]s have ended.’
+Furthermore, a [[mendicant]] with [[defilement]]s ended has well developed the four kinds of mindfulness meditation.
+This is a power that a [[mendicant]] who has ended the [[defilement]]s relies on to claim:
+‘My [[defilement]]s have ended.’
+Furthermore, a [[mendicant]] with [[defilement]]s ended has well developed the four bases of psychic power …
+the five faculties …
+the seven awakening factors …
+the noble eightfold path.
+This is a power that a [[mendicant]] who has ended the [[defilement]]s relies on to claim:
+‘My [[defilement]]s have ended.’
+A [[mendicant]] who has ended the [[defilement]]s has these eight powers that qualify them to claim:
+‘My [[defilement]]s have ended.’”

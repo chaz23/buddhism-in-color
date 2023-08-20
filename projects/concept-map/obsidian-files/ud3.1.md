@@ -1,0 +1,9 @@
+So I have heard.
+At one time the Buddha was staying near Sāvatthī in Jeta’s Grove, Anāthapiṇḍika’s monastery.
+Now, at that time a certain [[mendicant]] was sitting not far from the Buddha cross-legged, with his [[body]] straight. As a result of past deeds, he suffered painful, sharp, severe, and acute feelings, which he endured unperturbed, with mindfulness and awareness.
+The Buddha saw him meditating and enduring that pain.
+Then, knowing the meaning of this, on that occasion the Buddha expressed this heartfelt sentiment:
+“A [[mendicant]] who has left all deeds behind,
+shaking off the dust of past deeds,
+unselfish, steady, poised,
+has no need to complain.”
