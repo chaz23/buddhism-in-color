@@ -1,0 +1,74 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/an-blurbs_root-en.json",
+    "collection": "an"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/dn-blurbs_root-en.json",
+    "collection": "dn"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/iti-blurbs_root-en.json",
+    "collection": "iti"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/ja-blurbs_root-en.json",
+    "collection": "ja"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/kp-blurbs_root-en.json",
+    "collection": "kp"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/mn-blurbs_root-en.json",
+    "collection": "mn"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/pli-tv-bi-pm-blurbs_root-en.json",
+    "collection": "pli-tv-bi-pm"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/pli-tv-bi-vb-blurbs_root-en.json",
+    "collection": "pli-tv-bi-vb"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/pli-tv-bu-pm-blurbs_root-en.json",
+    "collection": "pli-tv-bu-pm"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/pli-tv-bu-vb-blurbs_root-en.json",
+    "collection": "pli-tv-bu-vb"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/pli-tv-kd-blurbs_root-en.json",
+    "collection": "pli-tv-kd"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/pli-tv-pvr-blurbs_root-en.json",
+    "collection": "pli-tv-pvr"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/pv-blurbs_root-en.json",
+    "collection": "pv"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/sn-blurbs_root-en.json",
+    "collection": "sn"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/snp-blurbs_root-en.json",
+    "collection": "snp"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/super-blurbs_root-en.json",
+    "collection": "super"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/ud-blurbs_root-en.json",
+    "collection": "ud"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/suttacentral/bilara-data/published/root/en/blurb/vv-blurbs_root-en.json",
+    "collection": "vv"
+  }
+]

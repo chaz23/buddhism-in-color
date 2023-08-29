@@ -1,57 +1,54 @@
+import suttaTranslationUrls from "../data/urls/sutta_translation_en_sujato.json";
+import blurbUrls from "../data/urls/blurb_en.json";
+import htmlUrls from "../data/urls/sutta_html.json";
+
 export class Sutta {
   constructor(sutta) {
     this.sutta = sutta;
+    this.collection = sutta.match(/^.*?(?=[0-9])/)[0];
   }
-
-  collection = this.sutta; //.match(/^.*?(?=[0-9])/)[0];
 
   fetchSutta() {
-    const collection = this.sutta.match(/^.*?(?=[0-9])/)[0];
-    const nikaya = ["dn", "mn", "sn", "an"].includes(collection)
-      ? collection
-      : "kn";
+    const index = suttaTranslationUrls.map((d) => d.sutta).indexOf(this.sutta);
+    const url = suttaTranslationUrls[index].url;
 
-    let val;
-    if (["dn", "mn"].includes(nikaya)) {
-      val = this.sutta;
-    } else if (["sn", "an"].includes(nikaya)) {
-      let chapter = this.sutta.split(".")[0];
-      val = `${chapter}/${this.sutta}`;
-    } else if (["thag", "thig", "dhp"].includes(nikaya)) {
-      val = `${collection}/${this.sutta}`;
-    }
+    const text = fetch(url)
+      .then((resp) => resp.json())
+      .catch((error) => console.log(error));
 
-    const url = `https://raw.githubusercontent.com/suttacentral/bilara-data/published/translation/en/sujato/sutta/${nikaya}/${val}_translation-en-sujato.json`;
-
-    return url;
+    return text;
   }
 
-  // fetchSutta() {
-  //   const suttaPrefix =
-  //     "https://raw.githubusercontent.com/suttacentral/bilara-data/published/translation/en/sujato/sutta/";
-  //   const suttaFormatPrefix =
-  //     "https://raw.githubusercontent.com/suttacentral/bilara-data/published/html/pli/ms/sutta/";
+  async fetchHTML() {
+    const index = htmlUrls.map((d) => d.sutta).indexOf(this.sutta);
+    const url = htmlUrls[index].url;
 
-  //   const suttaSuffix = "_translation-en-sujato.json";
-  //   const suttaFormatSuffix = "_html.json";
+    const text = await fetch(url)
+      .then((resp) => resp.json())
+      .catch((error) => console.log(error));
 
-  //   const nikaya = this.sutta.substring(0, 2);
+    return text;
+  }
 
-  //   let middleValue;
-  //   if (nikaya === "dn" || nikaya === "mn") {
-  //     middleValue = nikaya + "/" + this.sutta;
-  //   } else {
-  //     let chapter = this.sutta.split(".");
-  //     chapter = chapter[0];
-  //     middleValue = nikaya + "/" + chapter + "/" + this.sutta;
-  //   }
-  //   const suttaURL = suttaPrefix + middleValue + suttaSuffix;
-  //   const suttaFormatURL = suttaFormatPrefix + middleValue + suttaFormatSuffix;
+  async fetchBlurb() {
+    const index = blurbUrls.map((d) => d.collection).indexOf(this.collection);
+    if (index === -1) return null;
 
-  //   return suttaURL;
-  // }
+    const url = blurbUrls[index].url;
 
-  fetchBlurb() {}
+    const text = await fetch(url)
+      .then((resp) => resp.json())
+      .catch((error) => console.log(error));
 
-  fetchTags() {}
+    return text;
+  }
+
+  renderSutta() {
+    const suttaText = this.fetchSutta();
+    const htmlText = this.fetchHTML();
+    console.log(suttaText);
+    // for (const key in Object.keys(suttaText)) {
+    //   console.log(key);
+    // }
+  }
 }

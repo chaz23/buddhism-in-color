@@ -11,12 +11,8 @@
             "id": "2dc593972cab4b3c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "mn2.md",
-                "mode": "source",
-                "source": true
-              }
+              "type": "graph",
+              "state": {}
             }
           }
         ]
@@ -70,7 +66,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "be5a94f06b8cc8dd",
@@ -86,7 +83,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "mn2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +99,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "mn2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,9 +120,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "mn2.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -149,6 +142,7 @@
   },
   "active": "2dc593972cab4b3c",
   "lastOpenFiles": [
+    "mn2.md",
     "contact.md",
     "ud8.10.md",
     "ud8.9.md",
@@ -173,7 +167,6 @@
     "ud6.10.md",
     "ud6.9.md",
     "ud6.8.md",
-    "ud6.7.md",
-    "ud6.6.md"
+    "ud6.7.md"
   ]
 }
