@@ -11,15 +11,13 @@ library(httr)
 library(purrr)
 library(stringi)
 library(jsonlite)
+library(snakecase)
 
 
-data_path <- "https://raw.githubusercontent.com/suttacentral/sc-data/master/dictionaries/complex/en/pli2en_dppn.json"
+data_path <- "./projects/sutta-characters/data/pli2en_dppn_original.json"
 
-sutta_proper_names <- GET(data_path) %>% 
-  content(as = "parsed", type = "application/json") %>% 
-  lapply(function (x) as_tibble(x)) %>% 
-  do.call("bind_rows", .)
-
+sutta_proper_names <- fromJSON(data_path) %>% 
+  as_tibble()
 
 regex <- list(starts_with_person = "(?=<dt class='place').*?(?=<dt class='person'|</dl>)",
               starts_with_place = "<dl class='place'.*(?=<dt class='person')")
@@ -61,10 +59,12 @@ sutta_characters <- sutta_proper_names %>%
   # Parse text field.
   mutate(text = map2(character, text, parse_text)) %>% 
   unnest(cols = text) %>% 
-  
-  # Transliterate character name.
-  mutate(character_trans = stri_trans_general(character, "latin-ascii"))
+  mutate(character = to_sentence_case(character)) %>% 
+  arrange(character)
 
 
-save(sutta_characters, file = "./R/characters-of-the-mn/data/compiled-persons-dppn.Rda")
+# Save data.
 
+write_json(sutta_characters, 
+           path = "./projects/sutta-characters/data/pli2en_dppn_tidied.json",
+           pretty = TRUE)
