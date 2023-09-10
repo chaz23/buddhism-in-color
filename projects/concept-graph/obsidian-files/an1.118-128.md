@@ -1,0 +1,2 @@
+“Mendicants, I do not see a single thing that leads to the decline and disappearance of the true teaching like having many wishes … having few wishes … lack of [[content]]ment … [[content]]ment … irrational application of mind … rational application of mind … lack of situational awareness … situational awareness … bad friends … good friends … pursuing bad habits and not good habits.
+Pursuing bad habits and not good habits leads to the decline and disappearance of the true teaching.”
