@@ -122,6 +122,16 @@
               "type": "outline",
               "state": {}
             }
+          },
+          {
+            "id": "cbc6fa53bc34ef4c",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency"
+              }
+            }
           }
         ]
       }
