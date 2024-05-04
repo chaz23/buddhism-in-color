@@ -1,0 +1,1 @@
+“A foolish person … makes much bad karma. … They kill living creatures, steal, commit sexual mis[[conduct]], and lie. … An astute person … makes much merit. … They don’t kill living creatures, steal, commit sexual mis[[conduct]], or lie. …”

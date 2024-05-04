@@ -1,0 +1,3 @@
+Not perceiving form internally, they see visions externally that are yellow, with yellow color, yellow hue, and yellow tint.
+Having mastered this, they are aware that:
+‘I know and see.’ …

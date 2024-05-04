@@ -1,0 +1,1 @@
+“A foolish person … makes much bad karma. … They say they’ve seen, heard, thought, or known something, but they haven’t. … An astute person … makes much merit. … They say they haven’t seen, heard, thought, or known something, and they haven’t. …”

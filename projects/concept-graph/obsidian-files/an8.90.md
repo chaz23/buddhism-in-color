@@ -1,3 +1,0 @@
-“Mendicants, a [[mendicant]] who has been convicted of aggravated mis[[conduct]] must behave themselves properly in eight respects.
-They must not perform an ordination, give dependence, or be attended by a novice. They must not consent to being appointed as adviser for [[nun]]s, and if they are appointed they should not give such advice. They must not consent to any Saṅgha appointment. They must not be put in an isolated place. They must not give rehabilitation in any offense similar to that which they transgressed.
-A [[mendicant]] who has been convicted of aggravated mis[[conduct]] must behave themselves properly in these eight respects.”

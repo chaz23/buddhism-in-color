@@ -1,1 +1,0 @@
-“Someone with four qualities is cast down to hell. … They’re faithless, unethical, shameless, and imprudent. … Someone with four qualities is raised up to heaven. … They’re faithful, ethical, conscientious, and prudent. …”

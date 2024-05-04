@@ -1,4 +1,0 @@
-“One thing, [[mendicant]]s, when developed and cultivated, leads to the getting of wisdom … the growth of wisdom … the increase of wisdom … to great wisdom … to widespread wisdom … to abundant wisdom … to deep wisdom … to extraordinary wisdom … to vast wisdom … to much wisdom … to fast wisdom … to light wisdom … to laughing wisdom … to swift wisdom … to sharp wisdom … to penetrating wisdom.
-What one thing?
-Mindfulness of the [[body]].
-This one thing, when developed and cultivated, leads to the getting of wisdom … the growth of wisdom … the increase of wisdom … to great wisdom … to widespread wisdom … to abundant wisdom … to deep wisdom … to extraordinary wisdom … to vast wisdom … to much wisdom … to fast wisdom … to light wisdom … to laughing wisdom … to swift wisdom … to sharp wisdom … to penetrating wisdom.”

@@ -1,0 +1,1 @@
+… with clairvoyance is Sakulā.

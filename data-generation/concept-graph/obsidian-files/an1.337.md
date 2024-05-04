@@ -1,0 +1,2 @@
+… so too the [[sentient being]]s who have the noble eye of wisdom are few,
+while those who are ignorant and confused are many.

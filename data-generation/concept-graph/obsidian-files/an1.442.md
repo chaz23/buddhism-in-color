@@ -1,0 +1,3 @@
+Not perceiving form internally, they see visions externally, limitless, both pretty and ugly.
+Having mastered this, they are aware that:
+‘I know and see.’ …

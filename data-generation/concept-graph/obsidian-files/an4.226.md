@@ -1,0 +1,1 @@
+“A foolish person … makes much bad karma. … wrong livelihood, wrong effort, wrong mindfulness, and wrong [[immersion]]. … An astute person … makes much merit. … right livelihood, right effort, right mindfulness, and right [[immersion]]. …”

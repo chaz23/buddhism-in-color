@@ -1,0 +1,4 @@
+“Mendicants, there are these seven underlying tendencies.
+What seven?
+The underlying tendencies of sensual desire, repulsion, views, doubt, [[conceit]], [[desire]] to be reborn, and ignorance.
+These are the seven underlying tendencies.”

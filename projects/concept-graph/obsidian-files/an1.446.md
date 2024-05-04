@@ -1,3 +1,0 @@
-Not perceiving form internally, they see visions externally that are white, with white color, white hue, and white tint.
-Having mastered this, they are aware that:
-‘I know and see.’ …

@@ -1,1 +1,0 @@
-“Taking into account interior factors, [[mendicant]]s, I do not see a single one that is so very harmful as having many wishes … having few wishes … lack of [[content]]ment … [[content]]ment … irrational application of mind … rational application of mind … lack of situational awareness … situational awareness …”

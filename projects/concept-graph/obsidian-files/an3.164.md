@@ -1,3 +1,0 @@
-Someone with three qualities is raised up to heaven.
-What three?
-They don’t themselves kill living creatures. They encourage others to not kill living creatures. And they approve of not killing living creatures. …

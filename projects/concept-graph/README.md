@@ -1,3 +1,0 @@
-# Sutta Concept Map
-
-## Project

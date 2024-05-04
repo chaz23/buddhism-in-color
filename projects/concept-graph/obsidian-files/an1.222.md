@@ -1,1 +1,0 @@
-… in retention is Ānanda.

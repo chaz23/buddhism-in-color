@@ -1,0 +1,1 @@
+“Someone with four qualities is cast down to hell. … wrong livelihood, wrong effort, wrong mindfulness, and wrong [[immersion]]. Someone with four qualities is raised up to heaven. … right livelihood, right effort, right mindfulness, and right [[immersion]]. …”

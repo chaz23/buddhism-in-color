@@ -1,1 +1,0 @@
-“Someone with four qualities is cast down to hell. … They say they haven’t seen, heard, thought, or known something, but they have. … Someone with four qualities is raised up to heaven. … They say they’ve seen, heard, thought, or known something, and they have. …”

@@ -1,1 +1,0 @@
-“Someone with four qualities is cast down to hell. … wrong view, wrong thought, wrong speech, wrong action. … Someone with four qualities is raised up to heaven. … right view, right thought, right speech, right action. …”

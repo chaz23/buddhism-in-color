@@ -1,3 +1,0 @@
-“… They themselves have wrong view …
-They themselves have right view; they encourage others to have right view; they approve of right view; and they praise right view.
-Someone with these four qualities is raised up to heaven.”

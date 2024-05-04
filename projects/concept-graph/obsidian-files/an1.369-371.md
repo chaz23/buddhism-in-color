@@ -1,2 +1,0 @@
-“… the [[sentient being]]s who die as animals and are reborn as [[gods]] are few,
-while those who die as animals and are reborn in hell, or the [[animal realm]], or the ghost realm are many.”
