@@ -24,7 +24,7 @@ plot
     background_color: "grey",
     point_size: 2,
     alpha: 5,
-    max_points: 1000000,
+    max_points: 1100000,
     encoding: {
       x: {
         field: "x",
