@@ -37,6 +37,16 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+
+      # Comment out this section to disable the cache.
+      - id: date
+        run: echo "date=$(TZ=Australia/Sydney date +'%Y-%U')" >> $GITHUB_OUTPUT
+      - id: cache-data
+        uses: actions/cache@v4
+        with:
+          path: src/.observablehq/cache
+          key: data-${{ hashFiles('src/data/*') }}-${{ steps.date.outputs.date }}
+
       - run: npm run build
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3
