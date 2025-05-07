@@ -4,7 +4,7 @@ on:
   # Run this workflow whenever a new commit is pushed to main.
   push: { branches: [main] }
   # Run this workflow once per day, at 10:15 UTC
-  schedule: [{ cron: "15 10 * * *" }]
+  # schedule: [{ cron: "15 10 * * *" }]
   # Run this workflow when triggered manually in GitHub’s UI.
   workflow_dispatch: {}
 
@@ -19,7 +19,16 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - name: checkout repo content
+        uses: actions/checkout@v4
+
+      - name: install R packages
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::dplyr
+            any::arrow
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -30,6 +39,7 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
-      - name: Deploy
+
+      - name: Deploy to Github Pages
         id: deployment
         uses: actions/deploy-pages@v4
