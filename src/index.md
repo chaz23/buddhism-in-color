@@ -1,6 +1,8 @@
 ```js
 import Deepscatter from "npm:deepscatter@latest";
 import * as arrow from "npm:apache-arrow@latest";
+
+import scatterTooltip from "./components/scatterTooltip.js";
 ```
 
 ```js
@@ -21,10 +23,11 @@ const plot = new Deepscatter("#plot", width, 600);
 plot
   .plotAPI({
     arrow_buffer: suttaSectionEmbeddingsArray,
+    // source_url: "https://benschmidt.org/arxiv",
     background_color: "grey",
-    point_size: 2,
+    point_size: 10,
     alpha: 5,
-    max_points: 1100000,
+    max_points: 100000,
     encoding: {
       x: {
         field: "x",
@@ -33,20 +36,14 @@ plot
         field: "y",
       },
       color: {
-        constant: "green",
+        constant: "red",
       },
     },
   })
   .then(() => {
     plot.click_function = (datum, plot) => console.log(datum);
-    plot.tooltip_function = (datum, plot) => console.log(datum);
+    plot.tooltip_html = (datum, plot) => scatterTooltip(datum);
   });
-```
-
-```js
-const scatterTooltip = (data) => {
-  return `<div>${data.sutta}</div>`;
-};
 ```
 
 <div id="plot" style="min-width:${width}px"></div>
