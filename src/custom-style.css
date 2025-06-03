@@ -13,3 +13,7 @@
   background-color: burlywood;
   min-height: 100vh;
 } */
+
+[aria-label="tip"] {
+  stroke: red;
+}

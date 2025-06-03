@@ -1,49 +1,87 @@
-```js
-import Deepscatter from "npm:deepscatter@latest";
-import * as arrow from "npm:apache-arrow@latest";
+---
+sql:
+  embeddings: data/sutta_section_embeddings.parquet
+---
 
-import scatterTooltip from "./components/scatterTooltip.js";
+```js
+const id_generator = () => {
+  var S4 = function () {
+    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+  };
+  return "a" + S4() + S4();
+};
 ```
 
 ```js
-const suttaSectionEmbeddingsTable = await FileAttachment(
-  "./data/sutta_section_embeddings.parquet"
-).parquet();
+const hover = (tip, pos, text) => {
+  const side_padding = 10;
+  const vertical_padding = 5;
+  const vertical_offset = 15;
 
-const suttaSectionEmbeddingsArray = arrow.tableToIPC(
-  suttaSectionEmbeddingsTable
+  // Empty it out
+  tip.selectAll("*").remove();
+
+  // Append the text
+  tip
+    .style("text-anchor", "middle")
+    .style("pointer-events", "none")
+    .attr("transform", `translate(${pos[0]}, ${pos[1] + 7})`)
+    .selectAll("text")
+    .data(text)
+    .join("text")
+    .style("dominant-baseline", "ideographic")
+    .text((d) => d)
+    .attr("y", (d, i) => (i - (text.length - 1)) * 15 - vertical_offset)
+    .style("font-weight", (d, i) => (i === 0 ? "bold" : "normal"));
+
+  const bbox = tip.node().getBBox();
+
+  // Add a rectangle (as background)
+  tip
+    .append("rect")
+    .attr("y", bbox.y - vertical_padding)
+    .attr("x", bbox.x - side_padding)
+    .attr("width", bbox.width + side_padding * 2)
+    .attr("height", bbox.height + vertical_padding * 2)
+    .style("fill", "white")
+    .style("stroke", "#d3d3d3")
+    .lower();
+};
+```
+
+```js
+const addTooltip = (chart) => {
+  let wrapper = d3.select(chart);
+  return chart;
+};
+```
+
+```js
+display(
+  addTooltip(
+    vg.plot(
+      vg.dot(vg.from("embeddings"), {
+        x: "x",
+        y: "y",
+        fill: "steelblue",
+        stroke: "steelblue",
+        strokeWidth: 0.5,
+        channels: {
+          Sutta: "sutta",
+          Section: "section_text",
+        },
+        tip: {
+          format: {
+            x: false,
+            y: false,
+          },
+          fontSize: 14,
+        },
+      }),
+      // vg.panZoom(),
+      vg.width(600),
+      vg.height(700)
+    )
+  )
 );
 ```
-
-```js
-const plot = new Deepscatter("#plot", width, 600);
-```
-
-```js
-plot
-  .plotAPI({
-    arrow_buffer: suttaSectionEmbeddingsArray,
-    // source_url: "https://benschmidt.org/arxiv",
-    background_color: "grey",
-    point_size: 10,
-    alpha: 5,
-    max_points: 100000,
-    encoding: {
-      x: {
-        field: "x",
-      },
-      y: {
-        field: "y",
-      },
-      color: {
-        constant: "red",
-      },
-    },
-  })
-  .then(() => {
-    plot.click_function = (datum, plot) => console.log(datum);
-    plot.tooltip_html = (datum, plot) => scatterTooltip(datum);
-  });
-```
-
-<div id="plot" style="min-width:${width}px"></div>
