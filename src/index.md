@@ -58,30 +58,28 @@ const addTooltip = (chart) => {
 
 ```js
 display(
-  addTooltip(
-    vg.plot(
-      vg.dot(vg.from("embeddings"), {
-        x: "x",
-        y: "y",
-        fill: "steelblue",
-        stroke: "steelblue",
-        strokeWidth: 0.5,
-        channels: {
-          Sutta: "sutta",
-          Section: "section_text",
+  vg.plot(
+    vg.dot(vg.from("embeddings"), {
+      x: "x",
+      y: "y",
+      fill: "steelblue",
+      stroke: "steelblue",
+      strokeWidth: 0.5,
+      channels: {
+        Sutta: "sutta",
+        Section: "section_text",
+      },
+      tip: {
+        format: {
+          x: false,
+          y: false,
         },
-        tip: {
-          format: {
-            x: false,
-            y: false,
-          },
-          fontSize: 14,
-        },
-      }),
-      // vg.panZoom(),
-      vg.width(600),
-      vg.height(700)
-    )
+        fontSize: 14,
+      },
+    }),
+    // vg.panZoom(),
+    vg.width(800),
+    vg.height(800)
   )
 );
 ```
