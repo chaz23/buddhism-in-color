@@ -1,36 +1,99 @@
 import * as d3 from "npm:d3";
 import * as htl from "npm:htl";
 
+// #region Minimap
+// Function to create the minimap.
+function minimap(data, setState) {
+  const minimapVisual = visual(data, setState);
+  const minimapSelections = selections(data, setState);
+
+  return htl.html`${minimapSelections}${minimapVisual}`;
+}
+
+// #region Selections
+// Function to render the items in the current selection.
+function selections(data, setState) {}
+
 // #region Visual
-// Describe attributes and layout.
-const width = 500;
-const height = 800;
-const marginLeft = 20; // From this you need to subtract the radius of the root circle.
-const fills = {
-  selected: "#086fd3",
-  unselected: "#d4d4d4",
-};
-const radius = {
-  selected: 5,
-  unselected: 3.5,
-};
-
-// Link generator.
-const diagonal = d3
-  .link(d3.curveStep)
-  .x((d) => d.y)
-  .y((d) => d.x);
-
-// Function to determine whether a given node is an ancestor of the selected node.
-const isInSelectionPath = (d) =>
-  d.descendants().filter((d) => d.isSelected).length > 0;
-
-// Function to create the tree.
-const nodeSize = { height: 28, width: 20 };
-const tree = d3.tree().nodeSize([nodeSize.height, nodeSize.width]);
 
 // Function to draw the minimap visual.
-function minimap(data, setState) {
+function visual(data, setState) {
+  // Describe attributes and layout.
+  const width = 500;
+  const height = 800;
+  const marginLeft = 20; // From this you need to subtract the radius of the root circle.
+  const fills = {
+    selected: "#086fd3",
+    unselected: "#d4d4d4",
+  };
+  const radius = {
+    selected: 5,
+    unselected: 3.5,
+  };
+
+  // Link generator.
+  const diagonal = d3
+    .link(d3.curveStep)
+    .x((d) => d.y)
+    .y((d) => d.x);
+
+  // Function to determine whether a given node is an ancestor of the selected node.
+  const isInSelectionPath = (d) =>
+    d.descendants().filter((d) => d.isSelected).length > 0;
+
+  // Function to create the tree.
+  const nodeSize = { height: 28, width: 20 };
+  const tree = d3.tree().nodeSize([nodeSize.height, nodeSize.width]);
+
+  // Function to create labels for the minimap hierarchy.
+  function hierarchyLabel(d) {
+    const labelHeight = nodeSize.height * 0.8;
+    const labelWidth = 350;
+    const accentWidth = 8;
+    const accentFill = d.isSelected ? "pink" : "orange";
+    const fill = d.isSelected ? fills.selected : fills.unselected;
+
+    const acronym = d.data.acronym ? d.data.acronym : d.data.child_range;
+    const numChars = 40;
+    const label = `${acronym}: ${d.data.title}`;
+
+    return htl.svg`<g class='minimap-labels' height=${labelHeight}  width=${labelWidth}>
+    <rect x=0 y=-${
+      labelHeight / 2
+    } width=${accentWidth} height=${labelHeight} fill=${accentFill} rx=4 />
+    <rect x=${accentWidth - 4} y=-${labelHeight / 2} width=${
+      labelWidth - accentWidth
+    } height=${labelHeight} fill=${fill} rx=1.5 />
+    <text dx=8 dy=1 alignment-baseline=middle font-family=Inconsolata>
+      ${label.length > numChars ? `${label.slice(0, numChars)} ...` : label}
+    <text/>
+  </g>`;
+  }
+
+  // Function to pulse a circle.
+  // Adapted from https://observablehq.com/@bumbeishvili/pulse
+  function pulse(circle) {
+    (function repeat() {
+      circle
+        .attr("stroke", (d) =>
+          isInSelectionPath(d) ? fills.selected : fills.unselected
+        )
+        .attr("stroke-width", 0)
+        .attr("stroke-opacity", 0)
+        .transition()
+        .delay(100)
+        .duration(800)
+        .attr("stroke-width", 0)
+        .attr("stroke-opacity", 0.5)
+        .transition()
+        .duration(2000)
+        .attr("stroke-width", 25)
+        .attr("stroke-opacity", 0)
+        .ease(d3.easeSin)
+        .on("end", repeat);
+    })();
+  }
+
   // Create the SVG element.
   const svg = d3.create("svg").attr("width", width).attr("height", height);
 
@@ -92,6 +155,7 @@ function minimap(data, setState) {
       (enter) =>
         enter
           .append("circle")
+          .attr("class", (d) => `minimap-node-circle-${d.id}`)
           .attr("r", 0)
           .attr("transform", (d) => `translate(${source.y0},${source.x0})`)
           .transition()
@@ -232,58 +296,5 @@ function minimap(data, setState) {
   return svg.node();
 }
 //#endregion
-
-// #region Hierarchy labels
-// Function to create labels for the minimap hierarchy.
-const hierarchyLabel = (d) => {
-  const labelHeight = nodeSize.height * 0.8;
-  const labelWidth = 350;
-  const accentWidth = 8;
-  const accentFill = d.isSelected ? "pink" : "orange";
-  const fill = d.isSelected ? fills.selected : fills.unselected;
-
-  const acronym = d.data.acronym ? d.data.acronym : d.data.child_range;
-  const numChars = 40;
-  const label = `${acronym}: ${d.data.title}`;
-
-  return htl.svg`<g class='minimap-labels' height=${labelHeight}  width=${labelWidth}>
-    <rect x=0 y=-${
-      labelHeight / 2
-    } width=${accentWidth} height=${labelHeight} fill=${accentFill} rx=4 />
-    <rect x=${accentWidth - 4} y=-${labelHeight / 2} width=${
-    labelWidth - accentWidth
-  } height=${labelHeight} fill=${fill} rx=1.5 />
-    <text dx=8 dy=1 alignment-baseline=middle font-family=Inconsolata>
-      ${label.length > numChars ? `${label.slice(0, numChars)} ...` : label}
-    <text/>
-  </g>`;
-};
-// #endregion
-
-// #region Pulse
-// Function to pulse a circle.
-// Adapted from https://observablehq.com/@bumbeishvili/pulse
-const pulse = (circle) => {
-  (function repeat() {
-    circle
-      .attr("stroke", (d) =>
-        isInSelectionPath(d) ? fills.selected : fills.unselected
-      )
-      .attr("stroke-width", 0)
-      .attr("stroke-opacity", 0)
-      .transition()
-      .delay(100)
-      .duration(800)
-      .attr("stroke-width", 0)
-      .attr("stroke-opacity", 0.5)
-      .transition()
-      .duration(2000)
-      .attr("stroke-width", 25)
-      .attr("stroke-opacity", 0)
-      .ease(d3.easeSin)
-      .on("end", repeat);
-  })();
-};
-// #endregion
 
 export default minimap;
