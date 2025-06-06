@@ -64,17 +64,16 @@ sutta_data <- raw_sutta_data %>%
 kn_sutta_data <- raw_sutta_data %>%
   # Keep rows belonging to KN.
   filter(!grepl("(dn|mn|sn|an)[0-9]", segment_id)) %>%
-  
   # Extract sutta, section number and segment number.
-  
+
   # KN segment numbering:
-  
+
   # dhp: [sutta]:[segment_num]
   # Headings and subheadings of dhp have 0-th level numbering. (eg: 0.1)
-  
+
   # All other texts follow [sutta]:[section_num].[segment_num]
   # Except for thag which has 2 segments with 0-th level segment numbers.
-  
+
   mutate(
     sutta = str_extract(segment_id, "^.*(?=:)"),
     section_num = case_when(
@@ -88,10 +87,12 @@ kn_sutta_data <- raw_sutta_data %>%
       TRUE ~ str_extract(segment_id, "(?<=[:.])[0-9]+$")
     )
   ) %>%
-  
   # Extract nikaya (collection) and sutta number.
-  mutate(collection = str_extract(sutta, "[a-z]+"),
-         sutta_num = str_remove(sutta, "[a-z]+"))
+  mutate(
+    collection = str_extract(sutta, "[a-z]+"),
+    sutta_num = str_remove(sutta, "[a-z]+")
+  ) %>%
+  filter(collection %in% c("kp", "dhp", "ud", "iti", "snp", "thag", "thig", "cp"))
 
 
 
@@ -126,7 +127,10 @@ out <- sutta_data %>%
   left_join(sub_id_list, join_by(sutta == sub_id)) %>% 
   mutate(hierarchy_id = case_when(is.na(node_type) ~ id,
                                   .default = sutta)) %>% 
-  select(-id, -node_type)
+  select(-id, -node_type) %>% 
+  filter(!is.na(segment_text)) %>% 
+  rename(scripture = sutta,
+         scripture_num = sutta_num)
 
 temp_file <- tempfile(fileext = ".parquet")
 
