@@ -1,0 +1,21 @@
+@import url("observablehq:default.css");
+@import url("observablehq:theme-air.css");
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* prevent scrolling */
+}
+
+.welcome-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  z-index: 0; /* background layer */
+  pointer-events: auto; /* enable interaction */
+}

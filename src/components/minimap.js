@@ -1,57 +1,51 @@
 import * as d3 from "npm:d3";
 import * as htl from "npm:htl";
 
-// #region Minimap
-// Function to create the minimap.
-function minimap(data, setState) {
-  const minimapVisual = visual(data, setState);
-  const minimapSelections = selections(data, setState);
+class Minimap {
+  constructor(_data, _setState) {
+    this.data = _data;
+    this.setState = _setState;
 
-  return htl.html`${minimapSelections}${minimapVisual}`;
-}
+    this.root = d3
+      .stratify()
+      .id((d) => d["id"])
+      .parentId((d) => d["parent_id"])(_data);
 
-// #region Selections
-// Function to render the items in the current selection.
-function selections(data, setState) {}
+    this.selectedNode = this.root.descendants();
 
-// #region Visual
+    this.root.descendants().forEach((d) => {
+      d._children = d.children;
+      d.isSelected = false;
+      if (d.depth < 1) d.isSelected = true;
+      d.children = null;
+    });
 
-// Function to draw the minimap visual.
-function visual(data, setState) {
-  // Describe attributes and layout.
-  const width = 500;
-  const height = 800;
-  const marginLeft = 20; // From this you need to subtract the radius of the root circle.
-  const fills = {
-    selected: "#086fd3",
-    unselected: "#d4d4d4",
-  };
-  const radius = {
-    selected: 5,
-    unselected: 3.5,
-  };
+    // Global attributes.
+    this.nodeSize = { height: 28, width: 20 };
+    this.fills = {
+      selected: "#086fd3",
+      unselected: "#d4d4d4",
+    };
+    this.radius = {
+      selected: 5,
+      unselected: 3.5,
+    };
+  }
 
-  // Link generator.
-  const diagonal = d3
-    .link(d3.curveStep)
-    .x((d) => d.y)
-    .y((d) => d.x);
+  // updateSelection() {} ?? Could this work ??
 
   // Function to determine whether a given node is an ancestor of the selected node.
-  const isInSelectionPath = (d) =>
-    d.descendants().filter((d) => d.isSelected).length > 0;
-
-  // Function to create the tree.
-  const nodeSize = { height: 28, width: 20 };
-  const tree = d3.tree().nodeSize([nodeSize.height, nodeSize.width]);
+  isInSelectionPath(d) {
+    return d.descendants().filter((d) => d.isSelected).length > 0;
+  }
 
   // Function to create labels for the minimap hierarchy.
-  function hierarchyLabel(d) {
-    const labelHeight = nodeSize.height * 0.8;
+  hierarchyLabel(d) {
+    const labelHeight = this.nodeSize.height * 0.8;
     const labelWidth = 350;
     const accentWidth = 8;
     const accentFill = d.isSelected ? "pink" : "orange";
-    const fill = d.isSelected ? fills.selected : fills.unselected;
+    const fill = d.isSelected ? this.fills.selected : this.fills.unselected;
 
     const acronym = d.data.acronym ? d.data.acronym : d.data.child_range;
     const numChars = 40;
@@ -72,11 +66,13 @@ function visual(data, setState) {
 
   // Function to pulse a circle.
   // Adapted from https://observablehq.com/@bumbeishvili/pulse
-  function pulse(circle) {
-    (function repeat() {
+  pulse(circle) {
+    const repeat = () => {
       circle
         .attr("stroke", (d) =>
-          isInSelectionPath(d) ? fills.selected : fills.unselected
+          this.isInSelectionPath(d)
+            ? this.fills.selected
+            : this.fills.unselected
         )
         .attr("stroke-width", 0)
         .attr("stroke-opacity", 0)
@@ -91,210 +87,247 @@ function visual(data, setState) {
         .attr("stroke-opacity", 0)
         .ease(d3.easeSin)
         .on("end", repeat);
-    })();
+    };
+    repeat();
   }
 
-  // Create the SVG element.
-  const svg = d3.create("svg").attr("width", width).attr("height", height);
+  // Function to draw the minimap visual.
+  visual() {
+    // Describe attributes and layout.
+    const width = 500;
+    const height = 800;
+    const marginLeft = 20; // From this you need to subtract the radius of the this.root circle.
 
-  // Create the hierarchy.
-  const root = d3
-    .stratify()
-    .id((d) => d["id"])
-    .parentId((d) => d["parent_id"])(data);
+    // Link generator.
+    const diagonal = d3
+      .link(d3.curveStep)
+      .x((d) => d.y)
+      .y((d) => d.x);
 
-  // Group element that will contain the links.
-  const gLink = svg
-    .append("g")
-    .attr("fill", "none")
-    .attr("stroke-width", 2)
-    .attr("transform", (d) => `translate(${marginLeft},${height / 2})`);
+    // Function to create the tree.
+    const tree = d3
+      .tree()
+      .nodeSize([this.nodeSize.height, this.nodeSize.width]);
 
-  // Group element that will contain the nodes.
-  const gNode = svg
-    .append("g")
-    .attr("cursor", "pointer")
-    .attr("pointer-events", "all")
-    .attr("transform", (d) => `translate(${marginLeft},${height / 2})`);
+    // Create the SVG element.
+    const svg = d3.create("svg").attr("width", width).attr("height", height);
 
-  // Group element that will contain the text labels.
-  const gLabel = svg
-    .append("g")
-    .attr("cursor", "pointer")
-    .attr("pointer-events", "all")
-    .attr("transform", (d) => `translate(${marginLeft},${height / 2})`);
+    // Group element that will contain the links.
+    const gLink = svg
+      .append("g")
+      .attr("fill", "none")
+      .attr("stroke-width", 2)
+      .attr("transform", `translate(${marginLeft},${height / 2})`);
 
-  // Function to (re)draw the hierarchy.
-  function update(event, source) {
-    root.eachAfter((d) => {
-      d.isSelected = d === source ? true : false;
-      d.children = d.depth >= source.depth && d !== source ? null : d.children;
-    });
+    // Group element that will contain the nodes.
+    const gNode = svg
+      .append("g")
+      .attr("cursor", "pointer")
+      .attr("pointer-events", "all")
+      .attr("transform", `translate(${marginLeft},${height / 2})`);
 
-    source.children = source.children ? null : source._children;
+    // Group element that will contain the text labels.
+    const gLabel = svg
+      .append("g")
+      .attr("cursor", "pointer")
+      .attr("pointer-events", "all")
+      .attr("transform", `translate(${marginLeft},${height / 2})`);
 
-    const duration = 250;
-    const nodes = root.descendants().reverse();
-    const links = root.links().sort((a, b) => {
-      return isInSelectionPath(a.target) === isInSelectionPath(b.target)
-        ? 0
-        : isInSelectionPath(a.target)
-        ? 1
-        : -1;
-    });
+    // Function to (re)draw the hierarchy.
+    const update = (event, source) => {
+      this.root.eachAfter((d) => {
+        d.isSelected = d === source ? true : false;
+        d.children =
+          d.depth >= source.depth && d !== source ? null : d.children;
+      });
 
-    tree(root);
+      source.children = source.children ? null : source._children;
 
-    const node = gNode.selectAll("circle").data(nodes, (d) => d.id);
-    const link = gLink.selectAll("path").data(links, (d) => d.target.id);
-    const label = gLabel.selectAll("g").data(nodes, (d) => d.id);
+      const duration = 250;
+      const nodes = this.root.descendants().reverse();
+      const links = this.root.links().sort((a, b) => {
+        return this.isInSelectionPath(a.target) ===
+          this.isInSelectionPath(b.target)
+          ? 0
+          : this.isInSelectionPath(a.target)
+          ? 1
+          : -1;
+      });
 
-    const maxDepth = Math.max(...nodes.map((d) => d.depth));
+      tree(this.root);
 
-    node.join(
-      (enter) =>
-        enter
-          .append("circle")
-          .attr("class", (d) => `minimap-node-circle-${d.id}`)
-          .attr("r", 0)
-          .attr("transform", (d) => `translate(${source.y0},${source.x0})`)
-          .transition()
-          .duration(duration)
-          .attr("transform", (d) => `translate(${d.y},${d.x})`)
-          .attr("r", (d) =>
-            isInSelectionPath(d) ? radius.selected : radius.unselected
-          )
-          .selection()
-          .attr("fill", (d) =>
-            isInSelectionPath(d) ? fills.selected : fills.unselected
-          )
-          .on("click", (event, d) => {
-            update(event, d);
-            setState("selectedText", d.id);
-          }),
-      (update) =>
-        update
-          .transition()
-          .duration(duration)
-          .attr("transform", (d) => `translate(${d.y},${d.x})`)
-          .attr("r", (d) =>
-            isInSelectionPath(d) ? radius.selected : radius.unselected
-          )
-          .attr("fill", (d) =>
-            isInSelectionPath(d) ? fills.selected : fills.unselected
-          )
-          .selection(),
-      (exit) =>
-        exit
-          .transition()
-          .duration(duration)
-          .attr("transform", (d) => `translate(${d.parent.y},${d.parent.x})`)
-          .attr("r", 0)
-          .remove()
-    );
+      const node = gNode.selectAll("circle").data(nodes, (d) => d.id);
+      const link = gLink.selectAll("path").data(links, (d) => d.target.id);
+      const label = gLabel
+        .selectAll(".minimap-labels")
+        .data(nodes, (d) => d.id);
 
-    link.join(
-      (enter) =>
-        enter
-          .append("path")
-          .attr("d", (d) => {
-            const o = { x: source.x0, y: source.y0 };
-            return diagonal({ source: o, target: o });
-          })
-          .attr("stroke-opacity", 0)
-          .transition()
-          .duration(duration)
-          .attr("stroke-opacity", 1)
-          .attr("d", diagonal)
-          .attr("stroke", (d) =>
-            isInSelectionPath(d.target) ? fills.selected : fills.unselected
-          )
-          .selection(),
-      (update) => {
-        update
-          .sort((a, b) => {
-            return isInSelectionPath(a.target) === isInSelectionPath(b.target)
-              ? 0
-              : isInSelectionPath(a.target)
-              ? 1
-              : -1;
-          })
-          .attr("stroke", (d) =>
-            isInSelectionPath(d.target) ? fills.selected : fills.unselected
-          )
-          .attr("d", diagonal)
-          .selection();
-      },
-      (exit) =>
-        exit
-          .transition()
-          .duration(duration)
-          .attr("stroke-opacity", 0)
-          .remove()
-          .attr("d", (d) => {
-            const o = { x: d.target.parent.x, y: d.target.parent.y };
-            return diagonal({ source: o, target: o });
-          })
-    );
+      const maxDepth = Math.max(...nodes.map((d) => d.depth));
 
-    // Draw labels.
-    label.join(
-      (enter) => {
-        enter
-          .filter((d) => d.depth === maxDepth)
-          .append(function (d) {
-            return hierarchyLabel(d);
-          })
-          .attr("transform", (d) => `translate(${d.y + 20},${d.x})`)
-          .attr("opacity", 0)
-          .transition()
-          .duration(duration)
-          .attr("opacity", 1)
-          .selection()
-          .on("click", (event, d) => update(event, d));
-      },
-      (update) => {
-        update.each(function (d) {
-          d3.select(this)
-            .select("rect")
-            .attr("fill", d.isSelected ? fills.selected : fills.unselected);
-        });
+      node.join(
+        (enter) =>
+          enter
+            .append("circle")
+            .attr("class", (d) => `minimap-node-circle-${d.id}`)
+            .attr("r", 0)
+            .attr("transform", (d) => `translate(${source.y0},${source.x0})`)
+            .transition()
+            .duration(duration)
+            .attr("transform", (d) => `translate(${d.y},${d.x})`)
+            .attr("r", (d) =>
+              this.isInSelectionPath(d)
+                ? this.radius.selected
+                : this.radius.unselected
+            )
+            .selection()
+            .attr("fill", (d) =>
+              this.isInSelectionPath(d)
+                ? this.fills.selected
+                : this.fills.unselected
+            )
+            .on("click", (event, d) => {
+              update(event, d);
+              this.selectedNode = d;
+              this.setState("selectedScripture", d.id);
+            }),
+        (update) =>
+          update
+            .transition()
+            .duration(duration)
+            .attr("transform", (d) => `translate(${d.y},${d.x})`)
+            .attr("r", (d) =>
+              this.isInSelectionPath(d)
+                ? this.radius.selected
+                : this.radius.unselected
+            )
+            .attr("fill", (d) =>
+              this.isInSelectionPath(d)
+                ? this.fills.selected
+                : this.fills.unselected
+            )
+            .selection(),
+        (exit) =>
+          exit
+            .transition()
+            .duration(duration)
+            .attr("transform", (d) => `translate(${d.parent.y},${d.parent.x})`)
+            .attr("r", 0)
+            .remove()
+      );
 
-        update.filter((d) => d.depth !== maxDepth).remove();
-      },
-      (exit) => exit.remove()
-    );
+      link.join(
+        (enter) =>
+          enter
+            .append("path")
+            .attr("d", (d) => {
+              const o = { x: source.x0, y: source.y0 };
+              return diagonal({ source: o, target: o });
+            })
+            .attr("stroke-opacity", 0)
+            .transition()
+            .duration(duration)
+            .attr("stroke-opacity", 1)
+            .attr("d", diagonal)
+            .attr("stroke", (d) =>
+              this.isInSelectionPath(d.target)
+                ? this.fills.selected
+                : this.fills.unselected
+            )
+            .selection(),
+        (update) => {
+          update
+            .sort((a, b) => {
+              return this.isInSelectionPath(a.target) ===
+                this.isInSelectionPath(b.target)
+                ? 0
+                : this.isInSelectionPath(a.target)
+                ? 1
+                : -1;
+            })
+            .attr("stroke", (d) =>
+              this.isInSelectionPath(d.target)
+                ? this.fills.selected
+                : this.fills.unselected
+            )
+            .attr("d", diagonal)
+            .selection();
+        },
+        (exit) =>
+          exit
+            .transition()
+            .duration(duration)
+            .attr("stroke-opacity", 0)
+            .remove()
+            .attr("d", (d) => {
+              const o = { x: d.target.parent.x, y: d.target.parent.y };
+              return diagonal({ source: o, target: o });
+            })
+      );
 
-    // Pulse the circles.
-    setTimeout(() => {
-      const selectedCircles = gNode
-        .selectAll("circle")
-        .filter((d) => d._children);
-      pulse(selectedCircles);
-    }, duration + 100);
+      // Draw labels.
+      label.join(
+        (enter) => {
+          enter
+            .filter((d) => d.depth === maxDepth)
+            .append((d) => {
+              return this.hierarchyLabel(d);
+            })
+            .attr("transform", (d) => `translate(${d.y + 20},${d.x})`)
+            .attr("opacity", 0)
+            .transition()
+            .duration(duration)
+            .attr("opacity", 1)
+            .selection()
+            .on("click", (event, d) => update(event, d));
+        },
+        (update) => {
+          // update.each((d) => {
+          //   d3.select(this)
+          //     .select("rect")
+          //     .attr(
+          //       "fill",
+          //       d.isSelected ? this.fills.selected : this.fills.unselected
+          //     );
+          // });
+          update.filter((d) => d.depth !== maxDepth).remove();
+        },
+        (exit) => exit.remove()
+      );
 
-    root.eachBefore((d) => {
-      d.x0 = d.x;
-      d.y0 = d.y;
-    });
+      // Pulse the circles.
+      setTimeout(() => {
+        const selectedCircles = gNode
+          .selectAll("circle")
+          .filter((d) => d._children);
+        this.pulse(selectedCircles);
+      }, duration + 100);
+      this.root.eachBefore((d) => {
+        d.x0 = d.x;
+        d.y0 = d.y;
+      });
+    };
+
+    // Initialise the hierarchy and draw the first instance.
+    this.root.x0 = 0;
+    this.root.y0 = 0;
+
+    const rootNode = this.root.ancestors().filter((d) => d.depth === 0)[0];
+    update(null, rootNode);
+
+    return svg.node();
   }
 
-  // Initialise the hierarchy and draw the first instance.
-  root.x0 = 0;
-  root.y0 = 0;
-
-  root.descendants().forEach((d) => {
-    d._children = d.children;
-    d.isSelected = false;
-    if (d.depth < 1) d.isSelected = true;
-    d.children = null;
-  });
-
-  const rootNode = root.ancestors().filter((d) => d.depth === 0)[0];
-  update(null, rootNode);
-
-  return svg.node();
+  // Function to render the items in the current selection.
+  selections() {
+    const node = this.selectedNode;
+    const children = this.root.descendants().filter((d) => d.id === node);
+    return children;
+  }
 }
-//#endregion
 
-export default minimap;
+// const minimapVisual = visual(data, setState);
+// const minimapSelections = selections(data, setState);
+
+// return htl.html`${minimapSelections}${minimapVisual}`;
+
+export default Minimap;
