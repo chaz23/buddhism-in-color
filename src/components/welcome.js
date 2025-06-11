@@ -21,18 +21,19 @@ class Background {
         const letter = this.randomiseLetter();
 
         return {
-          id: `${ix},${iy},${letter}`,
+          id: `${ix}-${iy}`,
           x: ix,
           y: iy,
           letter: letter,
-          refreshTime: d3.randomInt(800, 1000)(),
+          refreshInterval: d3.randomInt(800, 3000)(),
+          refreshedAt: performance.now(),
         };
       })
     ).flat();
   }
 
   tileElement(d) {
-    return htl.svg`<g class="background-tile">
+    return htl.svg`<g id="tile-${d.id}" class="background-tile">
     <rect x=0 y=0 width=${this.tileSize} height=${
       this.tileSize
     } stroke="#121212" stroke-width=4 rx=10 />
@@ -45,11 +46,9 @@ class Background {
   }
 
   render() {
-    const yOff = (this.numRows * this.tileSize - this.height) / 2;
-
     const svg = htl.svg`<svg class="welcome-background"></svg>`;
-    const background = d3
-      .select(svg)
+
+    d3.select(svg)
       .append("rect")
       .attr("x", 0)
       .attr("y", 0)
@@ -58,50 +57,50 @@ class Background {
       .attr("fill", "hsl(0, 0%, 12%)");
 
     const gTile = d3.select(svg).append("g").attr("pointer-events", "all");
+    const tiles = gTile.selectAll("g").data(this.data, (d) => d.id);
 
-    const self = this;
-    function update(tileData) {
-      const tile = gTile.selectAll("g").data(tileData, (d) => d.id);
+    const yOff = (this.numRows * this.tileSize - this.height) / 2;
+    const textOpacity = { min: 0.2, max: 0.7 };
 
-      tile.join(
-        (enter) =>
-          enter
-            .append((d) => self.tileElement(d))
-            .attr(
-              "transform",
-              (d) =>
-                `translate(${d.x * self.tileSize},${
-                  d.y * self.tileSize - yOff
-                })`
-            )
-            .attr("stroke-opacity", 0)
-            .transition()
-            .duration(500)
-            .attr("stroke-opacity", 1)
-            .selection(),
-        (update) => update, //.attr("x", (d) => console.log(d)),
-        // .attr("stroke", "white")
-        // .transition()
-        // .duration(1000)
-        // .attr("stroke", "red")
-        // .selection(),
-        (exit) => exit.remove()
-      );
-    }
-
-    this.data.map((d, i) =>
-      setInterval(() => {
-        const letter = this.randomiseLetter();
-        this.data[i] = {
-          ...d,
-          letter: letter,
-          id: `${d.x},${d.y},${letter}`,
-        };
-        update(this.data);
-      }, d.refreshTime)
+    tiles.join(
+      (enter) =>
+        enter
+          .append((d) => this.tileElement(d))
+          .attr(
+            "transform",
+            (d) =>
+              `translate(${d.x * this.tileSize},${d.y * this.tileSize - yOff})`
+          )
+          .attr("stroke-opacity", textOpacity.min),
+      (update) => update,
+      (exit) => exit.remove()
     );
 
-    update(this.data);
+    d3.timer(() => {
+      this.data.forEach((d, i) => {
+        const now = performance.now();
+        const needsRefresh = now - d.refreshedAt > d.refreshInterval;
+
+        if (needsRefresh) {
+          const newLetter = this.randomiseLetter();
+          const duration = 300;
+          d3.select(`#tile-${d.id}`)
+            .select(".background-tile-text")
+            .transition()
+            .duration(duration)
+            .attr("stroke-opacity", textOpacity.min)
+            .on("end", function () {
+              d3.select(this)
+                .text(newLetter)
+                .transition()
+                .duration(duration)
+                .attr("stroke-opacity", textOpacity.max);
+            });
+          this.data[i].refreshedAt = performance.now();
+        }
+      });
+    });
+
     return svg;
   }
 }
