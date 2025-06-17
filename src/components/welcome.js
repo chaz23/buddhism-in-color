@@ -2,14 +2,18 @@ import * as d3 from "npm:d3";
 import * as htl from "npm:htl";
 
 class Background {
-  constructor() {
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
+  constructor(_width, _height) {
+    this.width = _width;
+    this.height = _height;
 
-    this.tileSize = 60;
+    this.tileSize = 50;
 
     this.numRows = Math.floor(this.height / this.tileSize) + 1;
-    this.numCols = Math.floor(this.width / this.tileSize) * 3;
+    this.numCols = Math.floor(this.width / this.tileSize) + 1;
+
+    this.xOff = (this.numCols * this.tileSize - this.width) / 2;
+    this.yOff = (this.numRows * this.tileSize - this.height) / 2;
+    this.textOpacity = { min: 0.3, max: 0.9 };
 
     this.randomiseLetter = () =>
       Array.from({ length: 26 }, (_, i) => String.fromCharCode(97 + i))[
@@ -18,18 +22,38 @@ class Background {
 
     this.data = Array.from({ length: this.numCols }, (dx, ix) =>
       Array.from({ length: this.numRows }, (dy, iy) => {
-        const letter = this.randomiseLetter();
-
         return {
           id: `${ix}-${iy}`,
           x: ix,
           y: iy,
-          letter: letter,
+          letter: this.randomiseLetter(),
           refreshInterval: d3.randomInt(800, 3000)(),
           refreshedAt: performance.now(),
+          refreshActive: true,
+          hoverLetter: null,
         };
       })
     ).flat();
+
+    this.hoverWords = ["peace", "tranquillity", "wisdom"];
+    this.hoverIds = null;
+  }
+
+  activateHover(e) {
+    const word =
+      this.hoverWords[Math.floor(Math.random() * this.hoverWords.length)];
+    const letters = word.split("");
+    const direction = 1; //d3.range(1, 9)[Math.floor(Math.random() * 8)];
+    let ids;
+    if (direction === 1) {
+      ids = letters.map((_, i) => `tile-${e.x + i}-${e.y}`);
+    }
+    e.refreshActive = false;
+    ids.forEach((d) => d3.select(`#${d} text`).attr("stroke", "purple"));
+  }
+
+  deactivateHover(e) {
+    e.refreshActive = true;
   }
 
   tileElement(d) {
@@ -46,6 +70,7 @@ class Background {
   }
 
   render() {
+    const self = this;
     const svg = htl.svg`<svg class="welcome-background"></svg>`;
 
     d3.select(svg)
@@ -56,45 +81,50 @@ class Background {
       .attr("height", this.height)
       .attr("fill", "hsl(0, 0%, 12%)");
 
-    const gTile = d3.select(svg).append("g").attr("pointer-events", "all");
-    const tiles = gTile.selectAll("g").data(this.data, (d) => d.id);
-
-    const yOff = (this.numRows * this.tileSize - this.height) / 2;
-    const textOpacity = { min: 0.2, max: 0.7 };
-
-    tiles.join(
-      (enter) =>
-        enter
-          .append((d) => this.tileElement(d))
-          .attr(
-            "transform",
-            (d) =>
-              `translate(${d.x * this.tileSize},${d.y * this.tileSize - yOff})`
-          )
-          .attr("stroke-opacity", textOpacity.min),
-      (update) => update,
-      (exit) => exit.remove()
-    );
+    d3.select(svg)
+      .append("g")
+      .attr("pointer-events", "all")
+      .selectAll("g")
+      .data(this.data, (d) => d.id)
+      .join(
+        (enter) =>
+          enter
+            .append((d) => this.tileElement(d))
+            .attr(
+              "transform",
+              (d) =>
+                `translate(${d.x * this.tileSize - this.xOff},${
+                  d.y * this.tileSize - this.yOff
+                })`
+            )
+            .attr("stroke-opacity", this.textOpacity.min),
+        (update) => update,
+        (exit) => exit.remove()
+      )
+      .on("mouseover", (event, d) => {
+        this.activateHover(d);
+      })
+      .on("mouseout", (event, d) => {
+        this.deactivateHover(d);
+      });
 
     d3.timer(() => {
       this.data.forEach((d, i) => {
         const now = performance.now();
         const needsRefresh = now - d.refreshedAt > d.refreshInterval;
 
-        if (needsRefresh) {
+        if (needsRefresh && d.refreshActive) {
           const newLetter = this.randomiseLetter();
-          const duration = 300;
-          d3.select(`#tile-${d.id}`)
+          d3.select(svg)
+            .select(`#tile-${d.id}`)
             .select(".background-tile-text")
             .transition()
-            .duration(duration)
-            .attr("stroke-opacity", textOpacity.min)
+            .attr("stroke-opacity", this.textOpacity.min)
             .on("end", function () {
               d3.select(this)
                 .text(newLetter)
                 .transition()
-                .duration(duration)
-                .attr("stroke-opacity", textOpacity.max);
+                .attr("stroke-opacity", self.textOpacity.max);
             });
           this.data[i].refreshedAt = performance.now();
         }

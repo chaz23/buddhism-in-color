@@ -1,5 +1,6 @@
 ---
 style: styles/front-page-style.css
+sidebar: false
 ---
 
 <!-- CODE -->
@@ -11,7 +12,8 @@ import Background from "./components/welcome.js";
 ```
 
 ```js
-const background = new Background();
+width;
+const background = new Background(window.innerWidth, window.innerHeight);
 ```
 
 <!-- LAYOUT -->
