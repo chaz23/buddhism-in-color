@@ -57,29 +57,69 @@ const addTooltip = (chart) => {
 ```
 
 ```js
-display(
-  vg.plot(
-    vg.dot(vg.from("embeddings"), {
-      x: "x",
-      y: "y",
-      fill: "steelblue",
-      stroke: "steelblue",
-      strokeWidth: 0.5,
-      channels: {
-        Sutta: "sutta",
-        Section: "section_text",
-      },
-      tip: {
-        format: {
-          x: false,
-          y: false,
-        },
-        fontSize: 14,
-      },
-    }),
-    // vg.panZoom(),
-    vg.width(800),
-    vg.height(800)
-  )
+// const $curr = vg.Param.value("mn1");
+const $curr = vg.Selection.intersect("mn1");
+
+const chart = vg.plot(
+  vg.dot(vg.from("embeddings"), {
+    x: "x",
+    y: "y",
+    fill: "steelblue",
+    stroke: "steelblue",
+    strokeWidth: 0.5,
+    // select: "nearestXY",
+  }),
+  // vg.voronoi(vg.from("embeddings"), {
+  //   x: "x",
+  //   y: "y",
+  //   fill: "section_text",
+  //   stroke: "grey",
+  //   fillOpacity: 0.3,
+  //   // select: "nearestXY",
+  // }),
+  // vg.nearestY({ channels: ["x"], as: $curr }),
+  // vg.highlight({ by: $curr }),
+  vg.panZoom(),
+  vg.width(800),
+  vg.height(800)
 );
+```
+
+```js
+display($curr);
+display(chart);
+```
+
+```js
+// let a = await sql`SELECT * FROM embeddings`;
+// a = a.toArray();
+```
+
+```js
+// const del = d3.Delaunay.from(
+//   a,
+//   (d) => d.x,
+//   (d) => d.y
+// );
+```
+
+```js
+
+```
+
+```js
+// const y = d3.select(chart).select("circle");
+// console.log(y.datum());
+// console.log(y._groups[0][0].attr("r"));
+d3.select(chart)
+  .select("svg")
+  .on("mousemove", function (event, d) {
+    console.log(event.clientX, event.clientY);
+  });
+
+// d3.select(chart)
+//   .selectAll("circle")
+//   .on("mouseover", function (event, d) {
+//     console.log(d);
+//   });
 ```
