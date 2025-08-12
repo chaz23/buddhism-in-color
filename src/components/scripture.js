@@ -2,18 +2,22 @@ import { FileAttachment } from "observablehq:stdlib";
 import { DuckDBClient } from "npm:@observablehq/duckdb";
 
 const db = await DuckDBClient.of({
-  sutta_data: FileAttachment("./../data/sutta_data.parquet"),
-  sutta_metadata: FileAttachment("./../data/sutta_hierarchy.parquet"),
+  scripture_data:
+    FileAttachment("./../data/scripture_data.parquet").href +
+    (navigator.userAgent.includes("Windows") ? `?t=${Date.now()}` : ""),
+  scripture_metadata:
+    FileAttachment("./../data/scripture_metadata.parquet").href +
+    (navigator.userAgent.includes("Windows") ? `?t=${Date.now()}` : ""),
 });
 
-class Sutta {
+class Scripture {
   constructor(_id) {
     this.id = _id;
   }
 
   async metadata(keys) {
     const metadataKeys = typeof keys === "string" ? keys : keys.join(", ");
-    const query = `SELECT ${metadataKeys} FROM sutta_metadata WHERE id='${this.id}'`;
+    const query = `SELECT ${metadataKeys} FROM scripture_metadata WHERE id='${this.id}'`;
     const result = await db.query(query);
     return result.toArray()[0];
   }
@@ -45,4 +49,4 @@ class Sutta {
   }
 }
 
-export default Sutta;
+export default Scripture;

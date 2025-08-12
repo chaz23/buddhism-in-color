@@ -39,5 +39,5 @@ display(state);
 ```js
 // display(minimap(sutta_hierarchy, setState));
 const x = new Minimap(sutta_hierarchy, setState);
-display(x.selections());
+display(x.visual());
 ```

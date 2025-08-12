@@ -16,6 +16,26 @@ body {
   width: 100vw;
   height: 100vh;
   display: block;
-  z-index: 0; /* background layer */
+  z-index: 1;
   pointer-events: auto; /* enable interaction */
+}
+
+.welcome-voronoi-mesh {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  z-index: 0;
+}
+
+.welcome-lotus {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  z-index: 1;
 }

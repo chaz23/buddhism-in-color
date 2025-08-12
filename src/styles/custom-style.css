@@ -2,18 +2,68 @@
 @import url("observablehq:default.css");
 @import url("observablehq:theme-air.css");
 
-/* * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-} */
-/* .test {
-  color: red;
-  border: 2px solid black;
-  background-color: burlywood;
-  min-height: 100vh;
-} */
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4&family=Atkinson+Hyperlegible&family=Open+Sans&family=Geist+Mono&display=swap');
 
-[aria-label="tip"] {
-  stroke: red;
+:root {
+  --color-1: #498df7;
+  --color-2: #e4af12;
+  --color-3: #E84364;
+  --color-4: #17aa28;
+  --color-5: #a533c2;
+  --color-6: #309fbb;
+  --theme-foreground: #1e1e1e;
+  --theme-foreground-focus: var(--color-2);
 }
+
+#observablehq-sidebar {
+  font-family: 'Open Sans';
+  font-size: 1rem;
+}
+
+.observablehq-link a {
+  border-radius: 0.3rem 0.3rem 0.3rem 0.3rem;
+}
+
+.observablehq-link-active a {
+  border-radius: 0 0.3rem 0.3rem 0;
+}
+
+/* Scatterplot. */
+
+.scatterplot-container {
+  border-radius: 0.4rem;
+  background-color: #a0a0a0;
+}
+
+.scatterplot-tooltip span,
+.scatterplot-tooltip div {
+  font-family: 'Source Serif 4';
+  font-size: 0.8rem;
+}
+
+.tooltip-title {
+  display: inline-block;
+  margin: 0.1rem 0 0.3rem 0;
+  font-family: "Geist Mono";
+}
+
+.tooltip-acronym {
+  border: 1px solid #d0d0d0;
+  background-color: #ededed;
+  border-radius: 0.2rem;
+  padding: 0 0.3rem;
+}
+
+.scatterplot-tooltip-metadata-container {
+  margin-bottom: 0.3rem;
+}
+
+.tooltip-divider {
+  margin: 0;
+  padding: 0.2rem 1rem;
+}
+
+.tooltip-section-text {
+  padding: 0;
+}
+

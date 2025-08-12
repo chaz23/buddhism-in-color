@@ -1,6 +1,7 @@
 ---
 style: styles/front-page-style.css
-sidebar: false
+sidebar: true
+header: false
 ---
 
 <!-- CODE -->
@@ -11,13 +12,16 @@ sidebar: false
 import Background from "./components/welcome.js";
 ```
 
-```js
+Homepage coming soon!!!!!!
+
+<!-- ```js
 width;
 const background = new Background(window.innerWidth, window.innerHeight);
-```
+``` -->
 
 <!-- LAYOUT -->
 
 ```js
-display(background.render());
+// display(background.mesh());
+// display(background.lotus());
 ```
